@@ -15,7 +15,7 @@ before((done) => {
 
 
 beforeEach((done) => {
-  console.log('hit before each, dropping db');
+  // console.log('hit before each, dropping db');
   mongoose.connection.collections.users.drop(() => {
     // Ready to run the next test
     done();
