@@ -4,7 +4,7 @@ const User = require('../src/user');
 describe('Updating records', () => {
   let gerry;
   beforeEach((done) => {
-    gerry = new User({ name: 'Gerry' });
+    gerry = new User({ name: 'Gerry', postCount: 0 });
     gerry.save().then(() => done());
   });
 
@@ -40,5 +40,13 @@ describe('Updating records', () => {
     assertName(
       User.findByIdAndUpdate(gerry._id, { name: 'Gerard' }), 
       done);
+  });
+  it('A user can have their post count incremented by 1', (done) => {
+    User.update({ name: 'Gerry' }, { $inc: { postCount: 1 }})
+      .then(() => User.findOne({ name: 'Gerry' }))
+      .then((user) => {
+        assert(user.postCount == 1);
+        done()
+      });
   });
 });
