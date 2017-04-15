@@ -5,24 +5,27 @@ describe('deleting a user', () => {
   let gerry;
   beforeEach((done) => {
     gerry = new User({ name: 'Gerry' });
+    console.log('creating new user');
     gerry.save()
       .then(() => done());
   });
   // Different ways to remove
   it('model instance remove', (done) => {
     gerry.remove().then(() => {
-      console.log("removed");
-      User.findOne({ name: 'Gerry' });
+      return User.findOne({ name: 'Gerry' });
     }).then((user) => {
-      console.log(user);
-      console.log("removed second then");
-      assert(user === undefined);
+      assert(user === null);
       done();
     });;
   });
 
-  it('class method remove', () => {
-
+  it('class method remove', (done) => {
+    User.remove({ name: 'Gerry' }).then(() => {
+      return User.findOne({ name: 'Gerry' });
+    }).then((user) => {
+      assert(user === null);
+      done();
+    });
   });
   it('class method findAndRemove', () => {
 
