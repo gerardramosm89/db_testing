@@ -15,9 +15,13 @@ before((done) => {
 
 
 beforeEach((done) => {
-  // console.log('hit before each, dropping db');
-  mongoose.connection.collections.users.drop(() => {
-    // Ready to run the next test
-    done();
+  const { users, comments, blogposts } = mongoose.connection.collections;
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop(() => {
+        console.log('all dbs dropped');
+        done();
+      });
+    });
   });
 });
