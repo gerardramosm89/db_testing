@@ -29,10 +29,30 @@ describe('Associations', () => {
     User.findOne({ name: 'Gerry' })
       .populate('blogPosts')
       .then((user) => {
-        console.log(user);
         //assert(user.blogPosts[0].title == 'JS is great');
-        console.log("Called done too early");
         done();
       });
   });
+
+  it('saves a full relation graph', (done) => {
+    User.findOne({ name: 'Gerry' })
+      .populate({
+        path: 'blogPosts',
+        populate: {
+          path: 'comments',
+          model: 'comment',
+          populate: {
+            path: 'user',
+            model: 'user'
+          }
+        }
+      })
+      .then((user) => {
+        assert(user.name === 'Gerry');
+        assert(user.blogPosts[0].title === 'JS is great');
+        assert(user.blogPosts[0].comments[0].content == 'Congrats on great post');
+        done();
+      });
+  });
+
 });

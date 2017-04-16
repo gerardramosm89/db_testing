@@ -19,7 +19,7 @@ beforeEach((done) => {
   users.drop(() => {
     comments.drop(() => {
       blogposts.drop(() => {
-        console.log('all dbs dropped');
+        //console.log('all dbs dropped');
         done();
       });
     });
