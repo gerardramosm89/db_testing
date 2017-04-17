@@ -32,7 +32,6 @@ describe('Reading users out of the db', () => {
     User.find({}).sort({ name: 1 })
       .skip(1).limit(2)
       .then((users) => {
-        console.log(users);
         assert(users[0].name === 'Gerry');
         assert(users[1].name === 'Maria');
         done()
