@@ -12,6 +12,18 @@ function render() {
     } else {
       document.getElementById('status').innerHTML = "loaded";
     }
+    // image
+    document.getElementById('imagesStatus').innerHTML = state.images.loading;
+    if(state.images.loading =="loading…"){
+         document.getElementById('imagesList').innerHTML = "";
+    }
+     else if(state.images.loading =="loaded"){
+         for(var i=0; i< state.images.data.length; i++){
+             document.getElementById('imagesList').innerHTML
+                   += ("<img src='"  + state.images.data[i].link + "' style='height:200px'>");
+         }
+     }
+  console.log('current state is: ', state);
 };
 store.subscribe(render);
 
@@ -33,4 +45,9 @@ document.getElementById('sum')
     var a = document.getElementById('a').value;
     var b = document.getElementById('b').value;
     store.dispatch(getSum(a, b));
+  })
+
+document.getElementById('randomImagesButton')
+  .addEventListener('click', function () {
+        store.dispatch(getRandomImages);
   })

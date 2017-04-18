@@ -10,9 +10,7 @@ function counter(currentState, action) {
   }
   switch (action.type) {
     case 'DECREMENT':
-    console.log('Hello wtf');
       nextState.result = currentState.result - 1;
-      console.log("nextstate is: ", nextState);
       return nextState;
     case 'INCREMENT':
       nextState.result = currentState.result + 1;

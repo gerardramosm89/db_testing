@@ -4,6 +4,7 @@
     <title>Redux basic example</title>
     <!--STEP 1.1-->
     <script src="https://npmcdn.com/redux@latest/dist/redux.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <!--~end STEP 1.1-->
   </head>
   <body>
@@ -18,11 +19,16 @@
         = <span id="value2">?</span>
         <button id="sum">Sum</button>
       </p>
+      <button id="randomImagesButton">Random Images</button>
+      <p id="imagesList"></p>
+      <br>
+      CountStatus: <span id="imagesStatus" style="color:blue"></span>
     </div>
     <script src="_fakeServerApi/index.js"></script>    
     <script src="actions/index.js"></script>
     <script src="reducers/counter.js"></script>
-    <script src="reducers/sum.js"></script>    
+    <script src="reducers/sum.js"></script>
+    <script src="reducers/images.js"></script>    
     <script src="reducers/index.js"></script>
     <script src="middlewares/index.js"></script>
     <script src="index.js"></script>
