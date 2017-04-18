@@ -1,34 +1,17 @@
-const logger = function(store) {
-  return function(next) {
-    return function(action) {
-      next(action);
-    }
-  }
-};
-
-// Middlware to log errors
-const crashReporter = function(store) {
-  return function(next) {
-    return function(action) {
-      try {
-        next(action);
-      } catch(err) {
-        console.group('crashReporter');
-        console.error('error happen with action == ', action);
-        console.error(err);
-        console.groupEnd('crashReporter');
-      }
-    }
-  }
-}
 
 
-var store = Redux.createStore(combineReducer, Redux.applyMiddleware(logger, crashReporter));
+
+var store = Redux.createStore(combineReducer, Redux.applyMiddleware(logger, crashReporter, thunk));
 
 function render() {
     var state = store.getState();
-    document.getElementById('value').innerHTML = state.count;
+    document.getElementById('value').innerHTML = state.count.result;
     document.getElementById('value2').innerHTML = state.sum;
+    if (state.count.loading) {
+      document.getElementById('status').innerHTML = "is loading...";
+    } else {
+      document.getElementById('status').innerHTML = "loaded";
+    }
 };
 store.subscribe(render);
 
@@ -43,7 +26,7 @@ document.getElementById('decrement')
   })
 document.getElementById('incrementAsync')
   .addEventListener('click', function () {
-        store.dispatch(increase());
+        store.dispatch(asyncIncrease);
   })
 document.getElementById('sum')
   .addEventListener('click', function () {
