@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redux basic example</title>
+    <!--STEP 1.1-->
+    <script src="https://npmcdn.com/redux@latest/dist/redux.min.js"></script>
+    <!--~end STEP 1.1-->
+  </head>
+  <body>
+    <div>
+      <p>
+        Clicked: <span id="value">0</span> times
+        <button id="decrement">Decrease</button>
+        <button id="incrementAsync">Increment async</button>
+        <p>
+        <input id="a" value="1"/> + <input id="b" value="2"/>
+        = <span id="value2">?</span>
+        <button id="sum">Sum</button>
+      </p>
+    </div>
+    <script src="actions/index.js"></script>
+    <script src="reducers/counter.js"></script>
+    <script src="reducers/sum.js"></script>    
+    <script src="reducers/index.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
